@@ -48,18 +48,17 @@
 	  */
 	ext(string, 'format', function() {
 		var s = this.toString();
-        if (!arguments.length) {
-            return s;
-        }
-        
-        var args = typeof arguments[0],
-            args = (("string" == args || "number" == args) ? arguments : arguments[0]);
-            
-        for (var a in args) {
-            s = s.replace("{" + a + "}", args[a]);
-        }
-        
-        return s;
+		if (!arguments.length) {
+		    return s;
+		}
+
+		var args = typeof arguments[0],
+		    args = (("string" == args || "number" == args) ? arguments : arguments[0]);
+		    
+		for (var a in args) {
+		    s = s.replace("{" + a + "}", args[a]);
+		}
+		return s;
 	});
 
 	ext(array, 'contains', function(i) {
