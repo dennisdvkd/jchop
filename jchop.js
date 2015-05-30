@@ -5,7 +5,7 @@
 	/** If you really are in love with Javascript.
 		Then don't use this. **/
 
-	/** Make same alias variables **/
+	/** Make some alias variables **/
 	var object = Object,
 		string = String,
 		number = Number,
@@ -20,5 +20,17 @@
 
 	ext(string, 'cap', function() {
 		return this.charAt(0).toUppercase() + this.slice(1);
+	});
+
+	ext(array, 'contains', function(i) {
+		return this.indexOf(i) !== -1;
+	});
+
+	ext(array, 'clone', function() {
+		return this.slice();
+	});
+
+	ext(number, 'nan', function() {
+		return +this !== +this;
 	});
 }
