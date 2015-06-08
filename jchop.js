@@ -1,4 +1,67 @@
-/** Immediately-Invoked Function Expression **/
+/** Functions **/
+
+/**
+  * Strip tags from a given string.
+  * @function stripTags
+  * @example stripTags('<b>Hello</b>This is a <p>test</p>.')
+  */
+function stripTags(h) {
+	var div = document.createElement('div');
+	div.innerHTML = h;
+	
+	return div.textContent;
+}
+
+/**
+  * Get a random number between min, max. Set i to true for a integer value.
+  * @function rand
+  * @example rand(2, 5);
+  */
+function rand(min, max, i) {
+	var r = Math.random() * (max - min) + min;
+	
+	return i ? r|0 : r;
+}
+
+/**
+  * Get the absolute url of a given string.
+  * @function getAbsoluteUrl
+  * @example getAbsoluteUrl("/this-is-the-url")
+  *
+  */
+var getAbsoluteUrl = (function() {
+	var u;
+
+	return function(uri) {
+		if (!u) u = document.createElement('a');
+		u.href = uri;
+
+		return u.href;
+	};
+})();
+
+/**
+  * Ensure the given function can only be called once.
+  * @function once
+  * @example var once = once(function() { alert('Hello'); }); once();
+  */
+function once(fn, context) {
+	var result;
+
+	return function() {
+		if (fn) {
+			result = fn.apply(context || this, arguments);
+			fn = null;
+		}
+
+		return result;
+	};
+}
+
+/**
+	Immediately-Invoked Function Expression
+	Extending Javascript objects.
+**/
 +function() {
 	'use strict';
 
@@ -35,6 +98,15 @@
 	  */
 	ext(string, 'rev', function() {
 		return this.split("").reverse().join("");
+	});
+
+	/**
+	  * Strip tags from a given string.
+      * @function stripTags
+      * @example "<b>Hello</b>This is a <p>test</p>.".striptags()
+  	  */
+	ext(string, 'striptags', function() {
+		return stripTags(this);
 	});
 
 	/**
